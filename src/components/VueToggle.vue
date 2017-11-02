@@ -25,7 +25,7 @@ function toggleStyle() {
 	const translateX = this.value ? 0 : (widthParent - widthCircle);
 
 	const containerStyle = {
-		'background-color': this.value ? '#30d126' : '#ff3333',
+		'background-color': this.value ? this.activeColor : this.inactiveColor,
 	};
 	const circleStyle = {
 		transform: `translateX(${translateX}px)`,
@@ -43,6 +43,14 @@ export default {
 		onChange,
 	},
 	props: {
+		activeColor: {
+			type: String,
+			default: '#30d126',
+		},
+		inactiveColor: {
+			type: String,
+			default: '#ff3333',
+		},
 		id: {
 			type: [String, Number],
 			required: true,

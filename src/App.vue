@@ -6,8 +6,25 @@
 		<main>
 			<p>
 				Default
-				<v-toggle id="v-t-default" v-model="toggleValue" v-on:input="getValue" />
+				<v-toggle id="v-t-default" v-model="toggleValue" v-on:input="getValue('toggleValue')" />
 			</p>
+			<div>
+				<header>
+					<h2 class="title">Custom Color
+						<span>(any valid value for the background-color property)</span>
+					</h2>
+				</header>
+			<p>
+				Perú
+				<v-toggle id="v-t-color" v-model="colorValue" v-on:input="getValue('colorValue')"
+					active-color="rgba(0,0,0,.38)" inactive-color="peru" />
+			</p>
+			<p>
+				Success
+				<v-toggle id="v-t-success" v-model="successValue" v-on:input="getValue('successValue')"
+					active-color="#4caf50" inactive-color="rgba(0,0,0,.38)" />
+			</p>
+			</div>
 			<p>
 				Disabled:
 				<v-toggle id="v-t-disabled" disabled="true" />
@@ -19,15 +36,17 @@
 <script>
 import VToggle from './components/VueToggle';
 
-function getValue(value) {
-	this.toggleValue = value;
+function getValue(fieldName) {
+	this[fieldName] = !this[fieldName];
 }
 
 export default {
 	name: 'app',
 	data() {
 		return {
-			toggleValue: false,
+			successValue: true,
+			colorValue: true,
+			toggleValue: true,
 		};
 	},
 	components: {
