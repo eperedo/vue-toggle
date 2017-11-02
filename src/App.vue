@@ -1,10 +1,17 @@
 <template>
 	<div id="app">
 		<header>
-			<span>Vue.js PWA</span>
+			<h1 class="title">v-toggle</h1>
 		</header>
 		<main>
-			<v-toggle v-model="toggleValue" v-on:input="getValue" />
+			<p>
+				Default
+				<v-toggle id="v-t-default" v-model="toggleValue" v-on:input="getValue" />
+			</p>
+			<p>
+				Disabled:
+				<v-toggle id="v-t-disabled" disabled="true" />
+			</p>
 		</main>
 	</div>
 </template>
@@ -33,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss">
-html {
-	font-size: 16px;
+.title {
+	text-align: center;
 }
 </style>

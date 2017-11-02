@@ -1,14 +1,12 @@
 <template>
-	<div class="v-toggle-container">
-		<label for="vue-toggle">
-			<div class="v-toggle" v-bind:class="toggleStyle">
-				<div class="v-toggle-circle" v-bind:class="toggleStyle">
-				</div>
+	<label for="vue-toggle">
+		<div class="v-toggle" v-bind:class="isDisabled" v-bind:style="toggleStyle.containerStyle">
+			<div class="v-toggle-circle" v-bind:style="toggleStyle.circleStyle">
 			</div>
-			<input type="checkbox" id="vue-toggle"
-				v-on:change="onChange" hidden />
-		</label>
-	</div>
+		</div>
+		<input type="checkbox" id="vue-toggle"
+			v-on:change="onChange" v-bind:disabled="isDisabled.disabled" hidden />
+	</label>
 </template>
 
 <script>
@@ -17,13 +15,28 @@ function onChange(event) {
 	this.$emit('input', event.target.checked);
 }
 
+function isDisabled() {
+	return { disabled: this.$attrs.disabled };
+}
+
 function toggleStyle() {
-	return this.value ? 'active' : 'inactive';
+	const widthParent = 107.5;
+	const widthCircle = 33.5;
+	const translateX = this.value ? 0 : (widthParent - widthCircle);
+
+	const containerStyle = {
+		'background-color': this.value ? '#30d126' : '#ff3333',
+	};
+	const circleStyle = {
+		transform: `translateX(${translateX}px)`,
+	};
+	return { containerStyle, circleStyle };
 }
 
 export default {
 	name: 'v-toggle',
 	computed: {
+		isDisabled,
 		toggleStyle,
 	},
 	methods: {
@@ -51,8 +64,9 @@ export default {
 	transition: background-color 0.2s ease-in-out;
   width: 107.5px;
 
-	&.active {
-		background-color: #30d126;
+	&.disabled {
+		cursor: not-allowed;
+		opacity: 0.4;
 	}
 
 	&.inactive {
@@ -66,19 +80,8 @@ export default {
   	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   	height: 33.6px;
 		position: absolute;
+		transition: transform 0.2s cubic-bezier(0,0,.2,1);
   	width: 33.6px;
-
-		&.active {
-			left: 0px;
-			transform: translateX(0);
-			transition: transform 0.2s cubic-bezier(0,0,.2,1);
-		}
-
-		&.inactive {
-			transform: translateX(calc(107.5px - 33.5px));
-			transition: transform 0.2s cubic-bezier(0,0,.2,1);
-		}
-
 	}
 
 }
