@@ -1,10 +1,10 @@
 <template>
-	<label for="vue-toggle">
+	<label v-bind:for="id">
 		<div class="v-toggle" v-bind:class="isDisabled" v-bind:style="toggleStyle.containerStyle">
 			<div class="v-toggle-circle" v-bind:style="toggleStyle.circleStyle">
 			</div>
 		</div>
-		<input type="checkbox" id="vue-toggle"
+		<input type="checkbox" v-bind:id="id"
 			v-on:change="onChange" v-bind:disabled="isDisabled.disabled" hidden />
 	</label>
 </template>
@@ -43,6 +43,10 @@ export default {
 		onChange,
 	},
 	props: {
+		id: {
+			type: [String, Number],
+			required: true,
+		},
 		value: {
 			type: Boolean,
 			default: false,
