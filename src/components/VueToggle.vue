@@ -1,18 +1,25 @@
 <template>
-	<label v-bind:for="id">
+	<label v-bind:for="id" tabindex="0" v-on:keyup.space="onChange">
 		<div class="v-toggle" v-bind:class="isDisabled" v-bind:style="toggleStyle.containerStyle">
 			<div class="v-toggle-circle" v-bind:style="toggleStyle.circleStyle">
+				<span class="text" v-if="showText" v-bind:style="toggleStyle.textStyle">{{toggleStyle.text}}</span>
 			</div>
 		</div>
-		<input type="checkbox" v-bind:id="id"
+		<input v-bind:ref="id" type="checkbox" v-bind:id="id"
 			v-on:change="onChange" v-bind:disabled="isDisabled.disabled" hidden />
 	</label>
 </template>
 
 <script>
 
+const DEFAULT_ACTIVE_COLOR = '#30d126';
+const DEFAULT_INACTIVE_COLOR = '#ff3333';
+
 function onChange(event) {
-	this.$emit('input', event.target.checked);
+	if (event.type === 'keyup') {
+		this.$refs[this.id].checked = !this.$refs[this.id].checked;
+	}
+	this.$emit('input', event.type === 'keyup' ? this.$refs[this.id].checked : event.target.checked);
 }
 
 function isDisabled() {
@@ -30,7 +37,11 @@ function toggleStyle() {
 	const circleStyle = {
 		transform: `translateX(${translateX}px)`,
 	};
-	return { containerStyle, circleStyle };
+	const textStyle = {
+		color: this.value ? this.activeColor : this.inactiveColor,
+	};
+	const text = this.value ? this.activeText : this.inactiveText;
+	return { containerStyle, circleStyle, textStyle, text };
 }
 
 export default {
@@ -45,15 +56,27 @@ export default {
 	props: {
 		activeColor: {
 			type: String,
-			default: '#30d126',
+			default: DEFAULT_ACTIVE_COLOR,
+		},
+		activeText: {
+			type: String,
+			default: 'On',
 		},
 		inactiveColor: {
 			type: String,
-			default: '#ff3333',
+			default: DEFAULT_INACTIVE_COLOR,
+		},
+		inactiveText: {
+			type: String,
+			default: 'Off',
 		},
 		id: {
 			type: [String, Number],
 			required: true,
+		},
+		showText: {
+			type: Boolean,
+			default: false,
 		},
 		value: {
 			type: Boolean,
@@ -71,6 +94,7 @@ export default {
   border: solid 0.5px #d9d9d9;
   border-radius: 100px;
 	cursor: pointer;
+	display: inline-block;
   height: 38.4px;
 	position: relative;
 	transition: background-color 0.2s ease-in-out;
@@ -94,6 +118,14 @@ export default {
 		position: absolute;
 		transition: transform 0.2s cubic-bezier(0,0,.2,1);
   	width: 33.6px;
+	}
+
+	.text {
+		font-weight: 900;
+		left: 3%;
+		padding: 20%;
+		position: relative;
+		top: 22%;
 	}
 
 }
