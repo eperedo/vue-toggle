@@ -4,6 +4,10 @@
 
 > design from [here](https://sketchrepo.com/free-sketch/onoff-switches-freebie/)
 
+> Demo in [codepen](https://codepen.io/eperedo/pen/ZaOYRE?editors=1011)
+
+![v-toggle](https://user-images.githubusercontent.com/461124/32417210-f7ba090c-c223-11e7-92f2-a6f82416c3d1.gif)
+
 ### Usage
 
 1. Install from npm
