@@ -27,15 +27,21 @@ function isDisabled() {
 }
 
 function toggleStyle() {
-	const widthParent = 107.5;
-	const widthCircle = 33.5;
+	const widthParent = this.width;
+	const heightParent = this.height;
+	const widthCircle = this.height - 6;
+	const heightCircle = this.height - 6;
 	const translateX = this.value ? 0 : (widthParent - widthCircle);
 
 	const containerStyle = {
 		'background-color': this.value ? this.activeColor : this.inactiveColor,
+		height: `${heightParent}px`,
+		width: `${widthParent}px`,
 	};
 	const circleStyle = {
+		height: `${heightCircle}px`,
 		transform: `translateX(${translateX}px)`,
+		width: `${widthCircle}px`,
 	};
 	const textStyle = {
 		color: this.value ? this.activeColor : this.inactiveColor,
@@ -62,6 +68,10 @@ export default {
 			type: String,
 			default: 'On',
 		},
+		height: {
+			type: Number,
+			default: 38.4,
+		},
 		inactiveColor: {
 			type: String,
 			default: DEFAULT_INACTIVE_COLOR,
@@ -81,6 +91,10 @@ export default {
 		value: {
 			type: Boolean,
 			default: false,
+		},
+		width: {
+			type: Number,
+			default: 107.5,
 		},
 	},
 };
@@ -112,12 +126,10 @@ export default {
 	.v-toggle-circle {
   	background-color: #fff;
 		border-radius: 50%;
-		bottom: 7%;
-  	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-  	height: 33.6px;
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
 		position: absolute;
+		margin-top: 3px;
 		transition: transform 0.2s cubic-bezier(0,0,.2,1);
-  	width: 33.6px;
 	}
 
 	.text {

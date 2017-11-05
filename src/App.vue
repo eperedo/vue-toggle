@@ -29,6 +29,16 @@
 				Disabled:
 				<v-toggle id="v-t-disabled" disabled="true" />
 			</p>
+			<div>
+				<header>
+					<h2 class="title">Custom Size</h2>
+				</header>
+				<p>
+					Small
+					<v-toggle v-bind:width="36" v-bind:height="22"
+						id="v-t-small" v-model="toggleSmall" v-on:input="getValue('toggleSmall')" />
+				</p>
+			</div>
 		</main>
 	</div>
 </template>
@@ -47,6 +57,7 @@ export default {
 			successValue: true,
 			colorValue: true,
 			toggleValue: true,
+			toggleSmall: true,
 		};
 	},
 	components: {
