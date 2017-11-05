@@ -1,11 +1,11 @@
 <template>
-	<label v-bind:for="id" tabindex="0" v-on:keyup.space="onChange">
+	<label v-bind:for="id" tabindex="0" v-on:keyup.enter="onChange">
 		<div class="v-toggle" v-bind:class="isDisabled" v-bind:style="toggleStyle.containerStyle">
 			<div class="v-toggle-circle" v-bind:style="toggleStyle.circleStyle">
 				<span class="text" v-if="showText" v-bind:style="toggleStyle.textStyle">{{toggleStyle.text}}</span>
 			</div>
 		</div>
-		<input v-bind:ref="id" type="checkbox" v-bind:id="id"
+		<input v-bind:ref="id" type="checkbox" v-bind:id="id" v-bind:checked="value"
 			v-on:change="onChange" v-bind:disabled="isDisabled.disabled" hidden />
 	</label>
 </template>
@@ -32,9 +32,9 @@ function toggleStyle() {
 	const widthCircle = this.height - 6;
 	const heightCircle = this.height - 6;
 	const translateX = this.value ? 0 : (widthParent - widthCircle);
-
+	const colorProperty = this.colorGradient ? 'background-image' : 'background-color';
 	const containerStyle = {
-		'background-color': this.value ? this.activeColor : this.inactiveColor,
+		[colorProperty]: this.value ? this.activeColor : this.inactiveColor,
 		height: `${heightParent}px`,
 		width: `${widthParent}px`,
 	};
@@ -67,6 +67,10 @@ export default {
 		activeText: {
 			type: String,
 			default: 'On',
+		},
+		colorGradient: {
+			type: Boolean,
+			default: false,
 		},
 		height: {
 			type: Number,

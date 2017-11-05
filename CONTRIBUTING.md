@@ -15,6 +15,13 @@ Thank you for your interesting in make this library better.
 	4. Upload your fix in a new branch and create a pull request
 	5. I will review the code and if everything is fine I will merge your changes.
 
+### Some code styles
+
+1. If you are gonna make modifications in the scss code, please take in mind
+ the css attributes must be ordered alphabetically
+
+2. For javascript I am using the airbnb eslint config.
+
 ### Generating a build
 
 1. Making a new build is easy thanks to poi, just type in your terminal

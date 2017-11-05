@@ -7,6 +7,6 @@ module.exports = {
 	sourceMap: false,
 	html: false,
 	format: 'umd',
-	moduleName: 'VueToggle',
+	moduleName: 'vToggle',
 	extractCSS: false
 };
