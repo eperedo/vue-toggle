@@ -25,6 +25,11 @@
           if (file.match(/\.(js|css)$/)) { %>
 		<link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
 		<link rel="preload" href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' as="style">
+		<style>
+			* {
+				font-family: monospace;
+			}
+		</style>
   </head>
   <body>
     <noscript>
