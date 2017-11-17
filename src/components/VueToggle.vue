@@ -31,7 +31,7 @@ function toggleStyle() {
 	const heightParent = this.height;
 	const widthCircle = this.height - 6;
 	const heightCircle = this.height - 6;
-	const translateX = this.value ? 0 : (widthParent - widthCircle);
+	const translateX = this.value ? 3 : ((widthParent - widthCircle) - 3);
 	const colorProperty = this.colorGradient ? 'background-image' : 'background-color';
 	const containerStyle = {
 		[colorProperty]: this.value ? this.activeColor : this.inactiveColor,
