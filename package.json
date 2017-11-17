@@ -1,6 +1,6 @@
 {
   "name": "v-toggle",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "a simple toggle component made with Vue",
   "author": "Eduardo P. Rivero",
   "main": "dist/v-toggle.min.js",
